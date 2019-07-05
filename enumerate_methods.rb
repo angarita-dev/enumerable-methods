@@ -28,4 +28,14 @@ module Enumerable
     end 
     return true
   end
+
+  def my_none?
+    for i in (0...self.length)
+      result = yield(self[i])
+      if result == nil || result == false
+        return false
+      end
+    end 
+    return true
+  end
 end
