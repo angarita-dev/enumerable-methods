@@ -48,11 +48,8 @@ module Enumerable
 
   def my_map(proc=nil)
     each do |current|
-      if proc
-        self[i] = proc.call(current)
-      else
-        self[i] = yield(current)
-      end
+      self[i] = yield(current)
+      self[i] = proc.call(current) if proc
     end
     return self
   end
