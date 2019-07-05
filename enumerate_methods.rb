@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This custom Enumerable module replicates the work of
 # ... the default Enumerable methods
 
