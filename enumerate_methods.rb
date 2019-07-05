@@ -1,18 +1,19 @@
-# This custom Enumerable module replicates the work of the default Enumerable methods 
+# This custom Enumerable module replicates the work of
+# ... the default Enumerable methods
 module Enumerable
   def my_each
     for i in (0...self.length)
       yield(self[i])
-    end 
+    end
   end
 
   def my_each_with_index
     for i in (0...self.length)
       yield(self[i], i)
-    end 
+    end
   end
 
-  def my_select 
+  def my_select
     result = []
     each do |current|
       result.push(current) if yield(current)
@@ -26,7 +27,7 @@ module Enumerable
       if result.nil? || result == false
         return false
       end
-    end 
+    end
     return true
   end
 
@@ -36,7 +37,7 @@ module Enumerable
       if result == nil || result == false
         return false
       end
-    end 
+    end
     return true
   end
 
@@ -47,7 +48,7 @@ module Enumerable
       if result == true
         counter += 1
       end
-    end 
+    end
     return counter
   end
 
@@ -58,11 +59,11 @@ module Enumerable
       else
         self[i] = proc.call(current)
       end
-    end 
+    end
     return self
   end
 
-  def my_inject 
+  def my_inject
     counter = self[0]
     each do |current|
       result = yield(counter,current)
@@ -71,7 +72,7 @@ module Enumerable
     return counter
   end
 
-  def multiply_els 
+  def multiply_els
     return my_inject {|counter,nexti| counter * nexti}
   end
 
@@ -81,4 +82,4 @@ p = Proc.new { |c|
   c+5
 }
 
-print [2,4,5].multiply_els 
+print [2,4,5].multiply_els
