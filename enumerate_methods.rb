@@ -2,13 +2,13 @@
 # ... the default Enumerable methods
 module Enumerable
   def my_each
-    for i in (0...self.length)
+    for i in (0...length)
       yield(self[i])
     end
   end
 
   def my_each_with_index
-    for i in (0...self.length)
+    for i in (0...length)
       yield(self[i], i)
     end
   end
@@ -34,9 +34,7 @@ module Enumerable
   def my_none?
     each do |current|
       result = yield(current)
-      if result == nil || result == false
-        return false
-      end
+      return false if result.nil? || result
     end
     return true
   end
@@ -45,14 +43,12 @@ module Enumerable
     counter = 0
     each do |current|
       result = yield(current)
-      if result == true
-        counter += 1
-      end
+      counter += 1 if result == true
     end
     return counter
   end
 
-  def my_map (proc=nil)
+  def my_map(proc=nil)
     each do |current|
       unless proc
         self[i] = yield(current)
@@ -82,4 +78,6 @@ p = Proc.new { |c|
   c+5
 }
 
-print [2,4,5].multiply_els
+print [2,4,5].my_none? { |x|
+  x < 1
+}
