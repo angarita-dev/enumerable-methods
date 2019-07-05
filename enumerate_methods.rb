@@ -38,4 +38,15 @@ module Enumerable
     end 
     return true
   end
+
+  def my_count
+    counter = 0
+    for i in (0...self.length)
+      result = yield(self[i])
+      if result == true
+        counter += 1
+      end
+    end 
+    return counter
+  end
 end
