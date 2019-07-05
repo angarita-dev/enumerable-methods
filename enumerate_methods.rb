@@ -10,4 +10,12 @@ module Enumerable
       yield self[i], i
     end 
   end
+
+  def my_select 
+    result []
+    for i in (0...self.length)
+      result.push self[i] if yield self[i]
+    end
+    return result
+  end
 end
