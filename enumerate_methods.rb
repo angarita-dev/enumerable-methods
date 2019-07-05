@@ -46,7 +46,7 @@ module Enumerable
     return counter
   end
 
-  def my_map(proc=nil)
+  def my_map(proc = nil)
     each do |current|
       self[i] = yield(current)
       self[i] = proc.call(current) if proc
