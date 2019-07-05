@@ -18,4 +18,14 @@ module Enumerable
     end
     return result
   end
+
+  def my_all?
+    for i in (0...self.length)
+      result = yield(self[i])
+      if result == nil || result == false
+        return false
+      end
+    end 
+    return true
+  end
 end
