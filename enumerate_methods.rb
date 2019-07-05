@@ -76,3 +76,8 @@ module Enumerable
 
 end
 
+p = Proc.new { |c|
+  c+5
+}
+
+print [2,4,5].my_map p
