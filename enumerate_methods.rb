@@ -60,4 +60,13 @@ module Enumerable
     end 
     return self
   end
+
+  def my_inject 
+    counter = self[0]
+    for i in (1...self.length)
+      result = yield(counter,self[i])
+      counter = result
+    end
+    return counter
+  end
 end
