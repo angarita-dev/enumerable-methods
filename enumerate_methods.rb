@@ -49,4 +49,15 @@ module Enumerable
     end 
     return counter
   end
+
+  def my_map (proc=nil)
+    for i in (0...self.length)
+      unless proc
+        self[i] = yield(self[i])
+      else
+        self[i] = proc.call(self[i])
+      end
+    end 
+    return self
+  end
 end
