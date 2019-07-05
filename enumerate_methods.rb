@@ -8,22 +8,22 @@ module Enumerable
 
   def my_each_with_index
     for i in (0...self.length)
-      yield(self[i],i)
+      yield(self[i], i)
     end 
   end
 
   def my_select 
-    result []
-    self.each do |current|
-      result.push self[i] if yield(current)
+    result = []
+    each do |current|
+      result.push(current) if yield(current)
     end
     return result
   end
 
   def my_all?
-    self.each do |current|
+    each do |current|
       result = yield(current)
-      if result == nil || result == false
+      if result.nil? || result == false
         return false
       end
     end 
@@ -31,7 +31,7 @@ module Enumerable
   end
 
   def my_none?
-    self.each do |current|
+    each do |current|
       result = yield(current)
       if result == nil || result == false
         return false
@@ -42,7 +42,7 @@ module Enumerable
 
   def my_count
     counter = 0
-    self.each do |current|
+    each do |current|
       result = yield(current)
       if result == true
         counter += 1
@@ -52,7 +52,7 @@ module Enumerable
   end
 
   def my_map (proc=nil)
-    self.each do |current|
+    each do |current|
       unless proc
         self[i] = yield(current)
       else
@@ -64,7 +64,7 @@ module Enumerable
 
   def my_inject 
     counter = self[0]
-    self.each do |current|
+    each do |current|
       result = yield(counter,current)
       counter = result
     end
@@ -72,7 +72,7 @@ module Enumerable
   end
 
   def multiply_els 
-    return self.my_inject {|counter,nexti| counter * nexti}
+    return my_inject {|counter,nexti| counter * nexti}
   end
 
 end
@@ -81,6 +81,4 @@ p = Proc.new { |c|
   c+5
 }
 
-print [2,4,5].my_all? { |c|
-  c < 5
-}
+print [2,4,5].multiply_els 
