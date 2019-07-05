@@ -24,9 +24,7 @@ module Enumerable
   def my_all?
     each do |current|
       result = yield(current)
-      if result.nil? || result == false
-        return false
-      end
+      return false if result.nil? || result == false
     end
     return true
   end
@@ -50,10 +48,10 @@ module Enumerable
 
   def my_map(proc=nil)
     each do |current|
-      unless proc
-        self[i] = yield(current)
-      else
+      if proc
         self[i] = proc.call(current)
+      else
+        self[i] = yield(current)
       end
     end
     return self
@@ -62,22 +60,13 @@ module Enumerable
   def my_inject
     counter = self[0]
     each do |current|
-      result = yield(counter,current)
+      result = yield(counter, current)
       counter = result
     end
     return counter
   end
 
   def multiply_els
-    return my_inject {|counter,nexti| counter * nexti}
+    return my_inject { |counter, nexti| counter * nexti }
   end
-
 end
-
-p = Proc.new { |c|
-  c+5
-}
-
-print [2,4,5].my_none? { |x|
-  x < 1
-}
