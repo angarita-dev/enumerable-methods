@@ -69,4 +69,10 @@ module Enumerable
     end
     return counter
   end
+
+  def multiply_els 
+    return self.my_inject {|counter,nexti| counter * nexti}
+  end
+
 end
+
