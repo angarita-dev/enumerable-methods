@@ -51,7 +51,6 @@ module Enumerable
       self[i] = yield(current)
       self[i] = proc.call(current) if proc
     end
-    return self
   end
 
   def my_inject
@@ -64,6 +63,6 @@ module Enumerable
   end
 
   def multiply_els
-    return my_inject { |counter, nexti| counter * nexti }
+    my_inject { |counter, nexti| counter * nexti }
   end
 end
