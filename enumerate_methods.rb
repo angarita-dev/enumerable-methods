@@ -18,14 +18,14 @@ module Enumerable
 
   def my_select
     result = []
-    each do |current|
+    my_each do |current|
       result.push(current) if yield(current)
     end
     return result
   end
 
   def my_all?
-    each do |current|
+    my_each do |current|
       result = yield(current)
       return false if result.nil? || result == false
     end
@@ -33,32 +33,43 @@ module Enumerable
   end
 
   def my_none?
-    each do |current|
+    my_each do |current|
       result = yield(current)
       return false if result.nil? || result
     end
     return true
   end
 
-  def my_count
+  def my_count(proc = nil)
     counter = 0
-    each do |current|
-      result = yield(current)
-      counter += 1 if result == true
+    if proc.nil?
+      my_each do |current|
+        result = yield(current)
+        counter += 1 if result == true || result == nil
+      end
+    else
+      my_each do |current|
+        counter += 1 if proc.call(current)
+      end
     end
     return counter
   end
 
   def my_map(proc = nil)
-    each do |current|
-      self[i] = yield(current)
-      self[i] = proc.call(current) if proc
+    result = []
+    my_each do |current|
+      if proc.nil?
+        result << yield(current)
+      else
+        result << proc.call(current)
+      end
     end
+    return result
   end
 
   def my_inject
     counter = self[0]
-    each do |current|
+    my_each do |current|
       result = yield(counter, current)
       counter = result
     end
@@ -69,3 +80,4 @@ module Enumerable
     my_inject { |counter, nexti| counter * nexti }
   end
 end
+
